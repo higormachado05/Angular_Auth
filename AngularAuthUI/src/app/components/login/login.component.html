@@ -9,22 +9,28 @@
                   </div>  
 
                   <div class="panel-body p-3">
-                    <form >
+                    <form [formGroup]="loginForm">
                         <div class="form-group pt-3">
                             <div class="input-field">
                                 <span class="fa fa-user p-2"></span>
-                                <input type="text" placeholder="Usuário">
+                                <input formControlName="username" type="text" placeholder="Usuário">
                             </div>
+                            <!--Se o usuário não digitar o usuário, ou inniciar a digitação e apagar, aparecerá uma mensagem solicitando o preenchimento do campo usuário-->
+                            <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required', 'username')" class="text-danger">*É necessário informar o usuário</small>
+
                             <div class="input-field">
                                 <span class="fa fa-lock p-2"></span>
-                                <input [type]="type" placeholder="Senha">
+                                <input formControlName="password" [type]="type" placeholder="Senha">
                                 <span (click)="hideShowPass()" class="fa {{eyeIcon}}"></span>
                             </div>
+
+                            <!--Se o usuário não digitar a senha, ou inniciar a digitação e apagar, aparecerá uma mensagem solicitando o preenchimento do campo senha-->
+                            <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required', 'password')" class="text-danger">*É necessário informar a senha</small>
                         </div>
                         <div class="form-inline fr mt-4">
                             <a id="forget" class="font-weight-bold">Esqueceu a senha</a>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block mt-4 w-100">Login</button>
+                        <button (click)="onSubmit()" type="submit" class="btn btn-primary btn-block mt-4 w-100">Login</button>
 
                         <div class="text-center pt-4 text-muted">Não tem uma conta? <a id="forget" routerLink="/signup">Criar Conta</a></div>
                         

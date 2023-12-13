@@ -9,36 +9,46 @@
                   </div>  
 
                   <div class="panel-body p-3">
-                    <form >
+                    <form [formGroup]="signupForm">
                         <div class="form-group pt-3">
                             <div class="input-field">
                                 <span class="fa fa-user p-2"></span>
-                                <input type="text" placeholder="Nome">
+                                <input formControlName="name" type="text" placeholder="Nome">
                             </div>
+                            <!--Se o usuário não digitar o campo nome, ou inniciar a digitação e apagar, aparecerá uma mensagem solicitando o preenchimento do campo nome-->
+                            <small *ngIf="signupForm.controls['name'].dirty && signupForm.hasError('required', 'name')" class="text-danger">*É necessário informar o nome</small>
 
                             <div class="input-field">
                                 <span class="fa fa-user p-2"></span>
-                                <input type="text" placeholder="Sobrenome">
+                                <input formControlName="lastname" type="text" placeholder="Sobrenome">
                             </div>
+                            <!--Se o usuário não digitar o campo sobrenome, ou iniciar a digitação e apagar, aparecerá uma mensagem solicitando o preenchimento do campo sobrenome-->
+                            <small *ngIf="signupForm.controls['lastname'].dirty && signupForm.hasError('required', 'lastname')" class="text-danger">*É necessário informar o sobrenome</small>
 
                             <div class="input-field">
                                 <span class="fa fa-user p-2"></span>
-                                <input type="text" placeholder="E-mail">
+                                <input input formControlName="email" type="text" placeholder="E-mail">
                             </div>
+                            <!--Se o usuário não digitar o campo email, ou iniciar a digitação e apagar, aparecerá uma mensagem solicitando o preenchimento do campo email-->
+                            <small *ngIf="signupForm.controls['email'].dirty && signupForm.hasError('required', 'email')" class="text-danger">*É necessário informar o E-mail</small>
 
                             <div class="input-field">
                                 <span class="fa fa-user p-2"></span>
-                                <input type="text" placeholder="Usuário">
+                                <input input formControlName="username" type="text" placeholder="Usuário">
                             </div>
+                            <!--Se o usuário não digitar o campo usuario, ou iniciar a digitação e apagar, aparecerá uma mensagem solicitando o preenchimento do campo usuario-->
+                            <small *ngIf="signupForm.controls['username'].dirty && signupForm.hasError('required', 'username')" class="text-danger">*É necessário informar o usuário</small>
 
                             <div class="input-field">
                                 <span class="fa fa-lock p-2"></span>
-                                <input [type]="type" placeholder="Senha">
+                                <input input formControlName="password" [type]="type" placeholder="Senha">
                                 <span (click)="hideShowPass()" class="fa {{eyeIcon}}"></span>
                             </div>
+                            <!--Se o usuário não digitar o campo senha, ou iniciar a digitação e apagar, aparecerá uma mensagem solicitando o preenchimento do campo senha-->
+                            <small *ngIf="signupForm.controls['password'].dirty && signupForm.hasError('required', 'password')" class="text-danger">*É necessário informar a senha</small>
                         </div>
                       
-                        <button type="submit" class="btn btn-primary btn-block mt-4 w-100">Cadastrar</button>
+                        <button (click)="onSignup()" class="btn btn-primary btn-block mt-4 w-100">Cadastrar</button>
 
                         <div class="text-center pt-4 text-muted">Já tem uma conta? <a id="forget" routerLink="/login">Fazer login</a></div>
                         

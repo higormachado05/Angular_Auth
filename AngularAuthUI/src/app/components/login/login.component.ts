@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import ValidateForm from 'src/app/helpers/validateform';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +12,15 @@ export class LoginComponent implements OnInit {
   type: string = "password";
   isText: boolean = false;
   eyeIcon: string = "fa-eye-slash";
+  loginForm!: FormGroup;
 
   constructor(private fb: FormBuilder ) { }
 
   ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    })
   }
 
   hideShowPass(){
@@ -22,5 +28,21 @@ export class LoginComponent implements OnInit {
     this.isText ? this.eyeIcon = "fa-eye" : this.eyeIcon = "fa-eye-slash";
     this.isText ? this.type = "text" : this.type = "password";
   }
+
+  onSubmit(){
+    if(this.loginForm.valid){
+      //Envia o obj para o banco de dados
+      console.log(this.loginForm.value);
+    } else {
+      //Lançar o erro dos campos obrigatórios
+      console.log("Formulário inválido");
+
+      ValidateForm.validateAllFormfileds(this.loginForm);
+      alert("Seu formulário é inválido!")
+      
+    }
+  }
+
+  
 
 }
