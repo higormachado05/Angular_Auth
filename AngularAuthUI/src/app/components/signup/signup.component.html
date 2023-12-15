@@ -13,10 +13,10 @@
                         <div class="form-group pt-3">
                             <div class="input-field">
                                 <span class="fa fa-user p-2"></span>
-                                <input formControlName="name" type="text" placeholder="Nome">
+                                <input formControlName="firstname" type="text" placeholder="Nome">
                             </div>
                             <!--Se o usuário não digitar o campo nome, ou inniciar a digitação e apagar, aparecerá uma mensagem solicitando o preenchimento do campo nome-->
-                            <small *ngIf="signupForm.controls['name'].dirty && signupForm.hasError('required', 'name')" class="text-danger">*É necessário informar o nome</small>
+                            <small *ngIf="signupForm.controls['firstname'].dirty && signupForm.hasError('required', 'name')" class="text-danger">*É necessário informar o nome</small>
 
                             <div class="input-field">
                                 <span class="fa fa-user p-2"></span>
